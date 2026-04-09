@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keystone LandWorks | Forestry Mulching, Land Clearing & Excavation</title>
+  <meta name="description" content="Keystone LandWorks provides forestry mulching, land clearing, and excavation services with clean results, dependable service, and professional equipment.">
+  <style>
+    :root {
+      --green-dark: #173324;
+      --green: #234b36;
+      --green-light: #2f6548;
+      --tan: #bda37a;
+      --tan-light: #e9dfd1;
+      --text: #1d1d1d;
+      --muted: #5b5b5b;
+      --bg: #f6f4ef;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .topbar { background: var(--green-dark); color: #fff; font-size: 14px; }
+    .topbar .container {
+      display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; flex-wrap: wrap;
+    }
+    .site-header {
+      position: sticky; top: 0; z-index: 20; background: rgba(246, 244, 239, 0.96);
+      backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav {
+      display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 16px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; min-width: 0; }
+    .brand img {
+      width: 76px; height: auto; display: block; border-radius: 10px; background: #fff;
+    }
+    .brand-text { min-width: 0; }
+    .brand-text strong {
+      display: block; font-size: 22px; color: var(--green-dark); letter-spacing: 0.3px;
+    }
+    .brand-text span {
+      display: block; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px;
+    }
+    .nav-links { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: var(--green-dark); font-weight: 700; font-size: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; padding: 14px 22px;
+      border-radius: 999px; text-decoration: none; font-weight: 700; transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--green-light); color: #fff; }
+    .btn-secondary { background: var(--white); color: var(--green-dark); border: 1px solid rgba(0,0,0,0.08); }
+    .hero {
+      padding: 72px 0 52px;
+      background: linear-gradient(rgba(23,51,36,0.72), rgba(23,51,36,0.72)), url('hero.jpg') center/cover no-repeat;
+      color: #fff;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: center; }
+    .eyebrow {
+      display: inline-block; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.12);
+      color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 14px; font-size: clamp(38px, 6vw, 68px); line-height: 1.05; letter-spacing: -1.3px; }
+    .hero p { margin: 0 0 24px; font-size: 19px; max-width: 720px; color: rgba(255,255,255,0.92); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 22px; }
+    .hero-points { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.92); }
+    .hero-card {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14); border-radius: 24px;
+      padding: 24px; backdrop-filter: blur(8px); box-shadow: var(--shadow);
+    }
+    .hero-card h3 { margin-top: 0; margin-bottom: 10px; font-size: 24px; }
+    .hero-card ul { margin: 0; padding-left: 18px; }
+    .hero-card li { margin-bottom: 10px; }
+    section { padding: 72px 0; }
+    .section-header { max-width: 760px; margin-bottom: 28px; }
+    .section-header h2 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 42px); color: var(--green-dark); line-height: 1.1; }
+    .section-header p { margin: 0; color: var(--muted); font-size: 18px; }
+    .services-grid, .benefits-grid, .gallery-grid, .areas-grid { display: grid; gap: 22px; }
+    .services-grid, .benefits-grid, .areas-grid, .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card {
+      background: var(--white); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .card h3 { margin-top: 0; margin-bottom: 10px; color: var(--green-dark); font-size: 24px; }
+    .card p { color: var(--muted); margin-bottom: 14px; }
+    .card ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .card li { margin-bottom: 8px; }
+    .band { background: linear-gradient(180deg, #ede7dd 0%, #e4dacb 100%); }
+    .gallery-item {
+      background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .gallery-image {
+      aspect-ratio: 4 / 3; background: linear-gradient(135deg, #254d38, #8b6d44); display: flex;
+      align-items: center; justify-content: center; color: rgba(255,255,255,0.88); font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; font-size: 14px; overflow: hidden;
+    }
+    .gallery-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-copy { padding: 18px; }
+    .gallery-copy h3 { margin: 0 0 8px; color: var(--green-dark); font-size: 20px; }
+    .gallery-copy p { margin: 0; color: var(--muted); }
+    .cta {
+      background: var(--green-dark); color: #fff; border-radius: 28px; padding: 34px; box-shadow: var(--shadow);
+      display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .cta h2 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 40px); }
+    .cta p { margin: 0; color: rgba(255,255,255,0.88); max-width: 700px; }
+    .contact-wrap { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: start; }
+    .contact-card, .contact-form {
+      background: var(--white); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .contact-card h3, .contact-form h3 { margin-top: 0; color: var(--green-dark); font-size: 24px; }
+    .contact-list { list-style: none; padding: 0; margin: 0; }
+    .contact-list li { padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .contact-list li:last-child { border-bottom: none; }
+    form { display: grid; gap: 14px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    input, textarea {
+      width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.12); font: inherit; background: #fff;
+    }
+    textarea { min-height: 150px; resize: vertical; }
+    .note { font-size: 13px; color: var(--muted); margin: 0; }
+    footer { background: var(--green-dark); color: rgba(255,255,255,0.88); padding: 28px 0; margin-top: 72px; }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .footer-wrap strong { color: #fff; }
+    @media (max-width: 960px) {
+      .hero-grid, .contact-wrap, .services-grid, .benefits-grid, .gallery-grid, .areas-grid { grid-template-columns: 1fr; }
+      .nav { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 640px) {
+      .topbar .container, .nav-links, .hero-actions, .hero-points, .footer-wrap { flex-direction: column; align-items: flex-start; }
+      .form-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 52px; }
+      .brand img { width: 62px; }
+      .brand-text strong { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div>Professional forestry mulching, land clearing, and excavation</div>
+      <div>Call today for a free estimate</div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <img src="logo.png" alt="Keystone LandWorks Logo">
+        <div class="brand-text">
+          <strong>Keystone LandWorks</strong>
+          <span>Forestry Mulching • Land Clearing • Excavation</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#areas">Service Area</a>
+        <a href="#contact">Contact</a>
+        <a href="tel:8042414949" class="btn btn-primary">Call Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Hard Work. Clean Results.</div>
+          <h1>Clearing land the right way.</h1>
+          <p>Keystone LandWorks helps property owners reclaim overgrown land, open up access, clean up fence lines, prep sites, and handle light excavation with dependable service and professional equipment.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Request a Quote</a>
+            <a href="tel:8042414949" class="btn btn-secondary">Call (804) 241-4949</a>
+          </div>
+          <div class="hero-points">
+            <span>Forestry Mulching</span>
+            <span>Land Clearing</span>
+            <span>Excavation</span>
+            <span>Property Improvement</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>What we help with</h3>
+          <ul>
+            <li>Clearing brush, saplings, and heavy overgrowth</li>
+            <li>Opening trails, shooting lanes, and access paths</li>
+            <li>Lot cleanup and site prep for better use of your property</li>
+            <li>Light grading, driveway work, and excavation support</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Land services built for real property work</h2>
+          <p>We focus on efficient, professional work that improves access, clears unusable ground, and gets your land ready for what’s next.</p>
+        </div>
+        <div class="services-grid">
+          <article class="card">
+            <h3>Forestry Mulching</h3>
+            <p>Fast, efficient clearing without the mess of traditional hauling and burning.</p>
+            <ul>
+              <li>Brush and undergrowth reduction</li>
+              <li>Small tree and sapling clearing</li>
+              <li>Trail and path opening</li>
+              <li>Fence row cleanup</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Land Clearing</h3>
+            <p>From overgrown sections to usable open ground, we help reshape and clean up your property.</p>
+            <ul>
+              <li>Lot and homesite clearing</li>
+              <li>Property line cleanup</li>
+              <li>Pasture and field edge clearing</li>
+              <li>Storm cleanup support</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Excavation</h3>
+            <p>Light dirt work completed with attention to grade, drainage, and a clean finish.</p>
+            <ul>
+              <li>Light grading and leveling</li>
+              <li>Driveway prep and touch-up</li>
+              <li>Site prep support</li>
+              <li>General excavation work</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <div class="section-header">
+          <h2>Why property owners choose Keystone LandWorks</h2>
+          <p>We keep the process straightforward: show up, communicate clearly, and leave the property better than we found it.</p>
+        </div>
+        <div class="benefits-grid">
+          <article class="card">
+            <h3>Dependable service</h3>
+            <p>We value good communication, honest work, and showing up ready to get the job done.</p>
+          </article>
+          <article class="card">
+            <h3>Clean results</h3>
+            <p>Our work is focused on practical improvement, usable land, and a finished look you can be proud of.</p>
+          </article>
+          <article class="card">
+            <h3>Built for your property</h3>
+            <p>Every property is different, so we tailor the work to your goals, terrain, and access needs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <h2>Recent project highlights</h2>
+          <p>Real job photos showing land clearing, trail work, equipment in action, and finished results.</p>
+        </div>
+        <div class="gallery-grid">
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery1.jpg" alt="Before and after land clearing near water"></div>
+            <div class="gallery-copy">
+              <h3>Property transformation</h3>
+              <p>Overgrowth removed and the ground opened back up for better use and access.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery2.jpg" alt="Cleared open field result"></div>
+            <div class="gallery-copy">
+              <h3>Open cleared field</h3>
+              <p>A clean, usable result that shows the impact of professional clearing work.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery3.jpg" alt="Trail cut through brush"></div>
+            <div class="gallery-copy">
+              <h3>Trail cutting</h3>
+              <p>New access paths cut through heavy brush and overgrowth.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery4.jpg" alt="Forestry mulcher working through brush"></div>
+            <div class="gallery-copy">
+              <h3>Equipment at work</h3>
+              <p>Forestry mulching equipment handling thick brush and rough ground.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery5.jpg" alt="Cleared path through overgrowth"></div>
+            <div class="gallery-copy">
+              <h3>Path clearing</h3>
+              <p>Opening up property lines and access areas with a clean finish.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery6.jpg" alt="Gravel road and finished clearing work"></div>
+            <div class="gallery-copy">
+              <h3>Finished property improvement</h3>
+              <p>Completed clearing and access work ready for ongoing use.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas" class="band">
+      <div class="container">
+        <div class="section-header">
+          <h2>Proud to serve local property owners</h2>
+          <p>Northern Neck, VA and surrounding areas.</p>
+        </div>
+        <div class="areas-grid">
+          <article class="card">
+            <h3>Primary area</h3>
+            <p>Northern Neck, VA</p>
+          </article>
+          <article class="card">
+            <h3>Nearby coverage</h3>
+            <p>Surrounding counties and rural properties</p>
+          </article>
+          <article class="card">
+            <h3>Project types</h3>
+            <p>Residential, farmland, hunting property, and general land improvement</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Need your property cleared or cleaned up?</h2>
+            <p>Call today to talk through your project, ask questions, and get started with a quote.</p>
+          </div>
+          <a href="tel:8042414949" class="btn btn-secondary">Call Now</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>Request a quote</h2>
+          <p>Call, email, or send a message to talk through your project and get a quote.</p>
+        </div>
+        <div class="contact-wrap">
+          <div class="contact-card">
+            <h3>Contact information</h3>
+            <ul class="contact-list">
+              <li><strong>Phone:</strong> <a href="tel:8042414949">(804) 241-4949</a></li>
+              <li><strong>Email:</strong> <a href="mailto:keystoneland@aol.com">keystoneland@aol.com</a></li>
+              <li><strong>Website:</strong> <a href="https://keystoneland.com">keystoneland.com</a></li>
+              <li><strong>Service Area:</strong> Northern Neck, VA and surrounding areas</li>
+            </ul>
+          </div>
+          <div class="contact-form">
+            <h3>Simple quote form</h3>
+            <form>
+              <div class="form-grid">
+                <input type="text" name="name" placeholder="Your name">
+                <input type="tel" name="phone" placeholder="Phone number">
+              </div>
+              <div class="form-grid">
+                <input type="email" name="email" placeholder="Email address">
+                <input type="text" name="location" placeholder="Property location">
+              </div>
+              <textarea name="project" placeholder="Tell us about your project"></textarea>
+              <button type="submit" class="btn btn-primary" style="border:none; cursor:pointer;">Send Request</button>
+              <p class="note">This form is a visual placeholder. On GitHub Pages, use the phone number or email above for contact unless you later connect a form service.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div><strong>Keystone LandWorks LLC</strong> — Forestry Mulching • Land Clearing • Excavation</div>
+      <div>© 2026 Keystone LandWorks. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
