@@ -19,6 +19,7 @@
       --shadow: 0 10px 30px rgba(0,0,0,0.08);
       --radius: 18px;
     }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -28,9 +29,20 @@
       background: var(--bg);
       line-height: 1.6;
     }
+
     a { color: inherit; }
-    .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
-    .topbar { background: var(--green-dark); color: #fff; font-size: 14px; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: var(--green-dark);
+      color: #fff;
+      font-size: 14px;
+    }
+
     .topbar .container {
       display: flex;
       justify-content: space-between;
@@ -38,6 +50,7 @@
       padding: 10px 0;
       flex-wrap: wrap;
     }
+
     .site-header {
       position: sticky;
       top: 0;
@@ -46,6 +59,7 @@
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0,0,0,0.06);
     }
+
     .nav {
       display: flex;
       justify-content: space-between;
@@ -53,6 +67,7 @@
       gap: 20px;
       padding: 16px 0;
     }
+
     .brand {
       display: flex;
       align-items: center;
@@ -60,6 +75,7 @@
       text-decoration: none;
       min-width: 0;
     }
+
     .brand img {
       width: 76px;
       height: auto;
@@ -67,13 +83,18 @@
       border-radius: 10px;
       background: #fff;
     }
-    .brand-text { min-width: 0; }
+
+    .brand-text {
+      min-width: 0;
+    }
+
     .brand-text strong {
       display: block;
       font-size: 22px;
       color: var(--green-dark);
       letter-spacing: 0.3px;
     }
+
     .brand-text span {
       display: block;
       font-size: 13px;
@@ -81,18 +102,21 @@
       text-transform: uppercase;
       letter-spacing: 1.2px;
     }
+
     .nav-links {
       display: flex;
       gap: 18px;
       align-items: center;
       flex-wrap: wrap;
     }
+
     .nav-links a {
       text-decoration: none;
       color: var(--green-dark);
       font-weight: 700;
       font-size: 14px;
     }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -103,24 +127,33 @@
       font-weight: 700;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
+
     .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: var(--green-light); color: #fff; }
+
+    .btn-primary {
+      background: var(--green-light);
+      color: #fff;
+    }
+
     .btn-secondary {
       background: var(--white);
       color: var(--green-dark);
       border: 1px solid rgba(0,0,0,0.08);
     }
+
     .hero {
       padding: 72px 0 52px;
       background: linear-gradient(rgba(23,51,36,0.72), rgba(23,51,36,0.72)), url('hero.jpg') center/cover no-repeat;
       color: #fff;
     }
+
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 28px;
       align-items: center;
     }
+
     .eyebrow {
       display: inline-block;
       padding: 8px 12px;
@@ -133,24 +166,28 @@
       text-transform: uppercase;
       margin-bottom: 18px;
     }
+
     .hero h1 {
       margin: 0 0 14px;
       font-size: clamp(38px, 6vw, 68px);
       line-height: 1.05;
       letter-spacing: -1.3px;
     }
+
     .hero p {
       margin: 0 0 24px;
       font-size: 19px;
       max-width: 720px;
       color: rgba(255,255,255,0.92);
     }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       margin-bottom: 22px;
     }
+
     .hero-points {
       display: flex;
       flex-wrap: wrap;
@@ -159,6 +196,7 @@
       font-weight: 700;
       color: rgba(255,255,255,0.92);
     }
+
     .hero-card {
       background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.14);
@@ -167,32 +205,42 @@
       backdrop-filter: blur(8px);
       box-shadow: var(--shadow);
     }
+
     .hero-card h3 {
       margin-top: 0;
       margin-bottom: 10px;
       font-size: 24px;
     }
+
     .hero-card ul {
       margin: 0;
       padding-left: 18px;
     }
+
     .hero-card li { margin-bottom: 10px; }
-    section { padding: 72px 0; }
+
+    section {
+      padding: 72px 0;
+    }
+
     .section-header {
       max-width: 760px;
       margin-bottom: 28px;
     }
+
     .section-header h2 {
       margin: 0 0 10px;
       font-size: clamp(28px, 4vw, 42px);
       color: var(--green-dark);
       line-height: 1.1;
     }
+
     .section-header p {
       margin: 0;
       color: var(--muted);
       font-size: 18px;
     }
+
     .services-grid,
     .benefits-grid,
     .gallery-grid,
@@ -200,10 +248,20 @@
       display: grid;
       gap: 22px;
     }
-    .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .benefits-grid,
-    .areas-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .areas-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .card {
       background: var(--white);
       border-radius: var(--radius);
@@ -211,20 +269,28 @@
       box-shadow: var(--shadow);
       border: 1px solid rgba(0,0,0,0.05);
     }
+
     .card h3 {
       margin-top: 0;
       margin-bottom: 10px;
       color: var(--green-dark);
       font-size: 24px;
     }
+
     .card p { color: var(--muted); margin-bottom: 14px; }
+
     .card ul {
       margin: 0;
       padding-left: 18px;
       color: var(--text);
     }
+
     .card li { margin-bottom: 8px; }
-    .band { background: linear-gradient(180deg, #ede7dd 0%, #e4dacb 100%); }
+
+    .band {
+      background: linear-gradient(180deg, #ede7dd 0%, #e4dacb 100%);
+    }
+
     .gallery-item {
       background: var(--white);
       border-radius: var(--radius);
@@ -232,6 +298,7 @@
       box-shadow: var(--shadow);
       border: 1px solid rgba(0,0,0,0.05);
     }
+
     .gallery-image {
       aspect-ratio: 4 / 3;
       background: linear-gradient(135deg, #254d38, #8b6d44);
@@ -245,22 +312,29 @@
       font-size: 14px;
       overflow: hidden;
     }
+
     .gallery-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-    .gallery-copy { padding: 18px; }
+
+    .gallery-copy {
+      padding: 18px;
+    }
+
     .gallery-copy h3 {
       margin: 0 0 8px;
       color: var(--green-dark);
       font-size: 20px;
     }
+
     .gallery-copy p {
       margin: 0;
       color: var(--muted);
     }
+
     .cta {
       background: var(--green-dark);
       color: #fff;
@@ -273,21 +347,25 @@
       gap: 24px;
       flex-wrap: wrap;
     }
+
     .cta h2 {
       margin: 0 0 8px;
       font-size: clamp(28px, 4vw, 40px);
     }
+
     .cta p {
       margin: 0;
       color: rgba(255,255,255,0.88);
       max-width: 700px;
     }
+
     .contact-wrap {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
       gap: 24px;
       align-items: start;
     }
+
     .contact-card,
     .contact-form {
       background: var(--white);
@@ -296,28 +374,38 @@
       box-shadow: var(--shadow);
       border: 1px solid rgba(0,0,0,0.05);
     }
+
     .contact-card h3,
     .contact-form h3 {
       margin-top: 0;
       color: var(--green-dark);
       font-size: 24px;
     }
+
     .contact-list {
       list-style: none;
       padding: 0;
       margin: 0;
     }
+
     .contact-list li {
       padding: 12px 0;
       border-bottom: 1px solid rgba(0,0,0,0.08);
     }
+
     .contact-list li:last-child { border-bottom: none; }
-    form { display: grid; gap: 14px; }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
+
     input, textarea {
       width: 100%;
       padding: 14px 16px;
@@ -326,21 +414,25 @@
       font: inherit;
       background: #fff;
     }
+
     textarea {
       min-height: 150px;
       resize: vertical;
     }
+
     .note {
       font-size: 13px;
       color: var(--muted);
       margin: 0;
     }
+
     footer {
       background: var(--green-dark);
       color: rgba(255,255,255,0.88);
       padding: 28px 0;
       margin-top: 72px;
     }
+
     .footer-wrap {
       display: flex;
       justify-content: space-between;
@@ -348,7 +440,9 @@
       flex-wrap: wrap;
       align-items: center;
     }
+
     .footer-wrap strong { color: #fff; }
+
     @media (max-width: 960px) {
       .hero-grid,
       .contact-wrap,
@@ -358,11 +452,13 @@
       .areas-grid {
         grid-template-columns: 1fr;
       }
+
       .nav {
         flex-direction: column;
         align-items: flex-start;
       }
     }
+
     @media (max-width: 640px) {
       .topbar .container,
       .nav-links,
@@ -372,10 +468,22 @@
         flex-direction: column;
         align-items: flex-start;
       }
-      .form-grid { grid-template-columns: 1fr; }
-      .hero { padding-top: 52px; }
-      .brand img { width: 62px; }
-      .brand-text strong { font-size: 19px; }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .brand img {
+        width: 62px;
+      }
+
+      .brand-text strong {
+        font-size: 19px;
+      }
     }
   </style>
 </head>
@@ -504,49 +612,49 @@
       <div class="container">
         <div class="section-header">
           <h2>Recent project highlights</h2>
-          <p>Real job photos showing land clearing, forestry mulching, trail work, and finished property improvements.</p>
+          <p>Real job photos from recent work. Every project is different, but the goal is always clean, usable land.</p>
         </div>
         <div class="gallery-grid">
           <article class="gallery-item">
-            <div class="gallery-image"><img src="gallery1.jpg" alt="Before and after land clearing near water"></div>
-            <div class="gallery-copy">
-              <h3>Property transformation</h3>
-              <p>Overgrowth removed and the property opened up for better use and access.</p>
-            </div>
-          </article>
-          <article class="gallery-item">
-            <div class="gallery-image"><img src="gallery2.jpg" alt="Cleared open field result"></div>
-            <div class="gallery-copy">
-              <h3>Equipment at work</h3>
-              <p>Forestry mulching equipment working through brush and heavy overgrowth.</p>
-            </div>
-          </article>
-          <article class="gallery-item">
-            <div class="gallery-image"><img src="gallery3.jpg" alt="Trail cut through brush"></div>
-            <div class="gallery-copy">
-              <h3>Clean finished result</h3>
-              <p>Clean, usable finish after clearing and property improvement.</p>
-            </div>
-          </article>
-          <article class="gallery-item">
-            <div class="gallery-image"><img src="gallery4.jpg" alt="Forestry mulcher working through brush"></div>
+            <div class="gallery-image"><img src="gallery1.jpg" alt="Land clearing project"></div>
             <div class="gallery-copy">
               <h3>Land clearing</h3>
-              <p>Another completed clearing job showing the range of work handled.</p>
+              <p>Removing overgrowth and opening up property for better use.</p>
             </div>
           </article>
           <article class="gallery-item">
-            <div class="gallery-image"><img src="gallery5.jpg" alt="Cleared path through overgrowth"></div>
+            <div class="gallery-image"><img src="gallery2.jpg" alt="Property improvement"></div>
             <div class="gallery-copy">
-              <h3>Light excavation</h3>
-              <p>Light excavation and grading work improving access and usability.</p>
+              <h3>Property improvement</h3>
+              <p>Turning rough ground into clean, usable space.</p>
             </div>
           </article>
           <article class="gallery-item">
-            <div class="gallery-image"><img src="gallery6.jpg" alt="Gravel road and finished clearing work"></div>
+            <div class="gallery-image"><img src="gallery3.jpg" alt="Trail cutting"></div>
             <div class="gallery-copy">
-              <h3>Finished property improvement</h3>
-              <p>Finished property ready for use with improved access and clean results.</p>
+              <h3>Trail work</h3>
+              <p>Cutting trails and access paths through heavy brush.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery4.jpg" alt="Forestry mulching"></div>
+            <div class="gallery-copy">
+              <h3>Forestry mulching</h3>
+              <p>Efficient clearing using professional equipment.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery5.jpg" alt="Access path"></div>
+            <div class="gallery-copy">
+              <h3>Access paths</h3>
+              <p>Creating clean and usable access across your property.</p>
+            </div>
+          </article>
+          <article class="gallery-item">
+            <div class="gallery-image"><img src="gallery6.jpg" alt="Finished work"></div>
+            <div class="gallery-copy">
+              <h3>Finished results</h3>
+              <p>Clean, professional results ready for use.</p>
             </div>
           </article>
         </div>
