@@ -1,0 +1,108 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { SITE, BLOG_POSTS } from '../consts.js';
+
+const { title, description, date, slug } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": date,
+  "author": {
+    "@type": "Organization",
+    "name": SITE.legalName,
+    "url": SITE.url
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": SITE.legalName,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE.url}/images/logo.png`
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${SITE.url}/blog/${slug}/`
+  }
+};
+
+const otherPosts = BLOG_POSTS.filter(p => p.slug !== slug).slice(0, 3);
+---
+
+<BaseLayout title={title} description={description} schema={articleSchema}>
+  <article>
+    <section>
+      <div class="container container-narrow">
+        <p style="color: var(--color-mute); font-size: 0.9rem;">
+          <a href="/blog">Blog</a> · {formattedDate}
+        </p>
+        <h1 style="margin-top: 0.5rem;">{title}</h1>
+        <p style="font-size: 1.2rem; margin-top: 1.5rem; color: var(--color-ink-soft);">
+          {description}
+        </p>
+      </div>
+    </section>
+
+    <section style="padding-top: 1rem;">
+      <div class="container container-narrow blog-content">
+        <slot />
+      </div>
+    </section>
+
+    {otherPosts.length > 0 && (
+      <section class="section-alt">
+        <div class="container">
+          <h2 style="text-align: center; margin-bottom: 2rem;">Other Articles</h2>
+          <div class="grid grid-3">
+            {otherPosts.map(post => (
+              <a href={`/blog/${post.slug}/`} class="card service-card">
+                <h3 style="font-size: 1.15rem;">{post.title}</h3>
+                <p>{post.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <CTABanner />
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .blog-content {
+    font-size: 1.075rem;
+    line-height: 1.75;
+  }
+  .blog-content h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .blog-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .blog-content p {
+    margin-bottom: 1.25rem;
+  }
+  .blog-content ul,
+  .blog-content ol {
+    margin: 0 0 1.25rem 1.5rem;
+  }
+  .blog-content li {
+    margin-bottom: 0.5rem;
+  }
+  .blog-content strong {
+    color: var(--color-primary-dark);
+  }
+</style>
+
+<style>
+  .service-card { display: block; text-decoration: none; color: inherit; }
+</style>

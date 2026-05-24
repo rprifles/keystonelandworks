@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { SITE } from '../consts.js';
+
+const title = `Project Gallery | Keystone LandWorks - Northern Neck VA`;
+const description = `See real forestry mulching, land clearing, excavation, and gravel driveway projects completed by Keystone LandWorks across the Northern Neck of Virginia. 25 years of project photos.`;
+
+// Real Keystone LandWorks project photos with SEO-optimized filenames and alt text
+const projects = [
+  { src: '/images/long-gravel-driveway-installation-virginia.jpg', alt: 'Long gravel driveway installation through the woods on a Northern Neck Virginia property', caption: 'Gravel Driveway · Long rural install through wooded property' },
+  { src: '/images/waterfront-lot-clearing-finished-northern-neck.jpg', alt: 'Finished waterfront lot clearing with water view in the Northern Neck of Virginia', caption: 'Waterfront Lot Clearing · Finished with water view' },
+  { src: '/images/forestry-mulching-pine-trees-northern-neck.jpg', alt: 'Forestry mulching on a Northern Neck property with mature pine trees preserved', caption: 'Forestry Mulching · Selective clearing, mature pines preserved' },
+  { src: '/images/case-excavator-skid-steer-land-clearing-virginia.jpg', alt: 'Case excavator and John Deere skid steer on a land clearing project in Virginia', caption: 'Equipment · Case excavator + skid steer on site' },
+  { src: '/images/cleared-homesite-northern-neck-virginia.jpg', alt: 'Cleared homesite ready for new home construction in the Northern Neck of Virginia', caption: 'Homesite Clearing · Cleared and ready for build' },
+  { src: '/images/gravel-driveway-crowned-virginia.jpg', alt: 'New gravel driveway with proper crown for water drainage on a Virginia property', caption: 'Gravel Driveway · Fresh install, properly crowned' },
+  { src: '/images/forestry-mulching-finished-northern-neck-virginia.jpg', alt: 'Forestry mulching finished work on a Northern Neck Virginia property', caption: 'Forestry Mulching · Park-like finish with trees retained' },
+  { src: '/images/waterfront-property-clearing-northern-neck.jpg', alt: 'Waterfront property clearing on the Northern Neck of Virginia', caption: 'Waterfront Clearing · Property opened to the water' },
+  { src: '/images/land-clearing-burn-pile-virginia.jpg', alt: 'Land clearing project with burn pile and excavator on a Virginia property', caption: 'Land Clearing · Heavy clearing with controlled burn' },
+  { src: '/images/gravel-driveway-residential-virginia.jpg', alt: 'Residential gravel driveway installation in the Northern Neck of Virginia', caption: 'Gravel Driveway · Residential install' },
+  { src: '/images/case-excavator-northern-neck-land-clearing.jpg', alt: 'Case excavator working on a land clearing project in the Northern Neck of Virginia', caption: 'Land Clearing · Case excavator at work' },
+  { src: '/images/forestry-mulching-marsh-waterfront-northern-neck.jpg', alt: 'Forestry mulching near waterfront marsh in the Northern Neck of Virginia', caption: 'Forestry Mulching · Waterfront marsh edge' },
+  { src: '/images/driveway-before-regrading-virginia.jpg', alt: 'Driveway before regrading and gravel installation on a Virginia property', caption: 'BEFORE · Rough dirt driveway needing rebuild' },
+  { src: '/images/driveway-after-regrading-virginia.jpg', alt: 'Same driveway after regrading and fresh gravel installation by Keystone LandWorks', caption: 'AFTER · Same driveway rebuilt with fresh gravel' },
+  { src: '/images/gravel-driveway-curved-installation.jpg', alt: 'Curved gravel driveway installation to a residential property in Virginia', caption: 'Gravel Driveway · Curved residential install' },
+  { src: '/images/site-preparation-pole-barn-virginia.jpg', alt: 'Site preparation for a pole barn on a Northern Neck Virginia property', caption: 'Site Prep · Pad ready for pole barn' },
+  { src: '/images/garage-pad-site-prep-virginia.jpg', alt: 'Finished garage pad site preparation in the Northern Neck of Virginia', caption: 'Site Prep · Building pad finished and graded' },
+  { src: '/images/finished-land-clearing-virginia.jpg', alt: 'Finished land clearing project with cleaned and leveled property in Virginia', caption: 'Finished Clearing · Ready for what is next' },
+  { src: '/images/gravel-driveway-rural-virginia-property.jpg', alt: 'Rural gravel driveway installation on a Virginia country property', caption: 'Gravel Driveway · Rural country install' },
+  { src: '/images/forestry-mulching-skid-steer-in-action.jpg', alt: 'Forestry mulching skid steer in action on a Virginia property', caption: 'Forestry Mulching · Skid steer working live' },
+  { src: '/images/homesite-clearing-with-silt-fence-virginia.jpg', alt: 'Homesite clearing with proper silt fence and erosion control in Virginia', caption: 'Homesite Clearing · With proper erosion control' },
+  { src: '/images/rural-gravel-driveway-northern-neck.jpg', alt: 'Long rural gravel driveway through the Northern Neck of Virginia', caption: 'Gravel Driveway · Long rural lane' },
+  { src: '/images/forestry-mulching-brush-clearing-virginia.jpg', alt: 'Forestry mulching brush clearing on a Northern Neck Virginia property', caption: 'Forestry Mulching · Brush and undergrowth cleared' },
+  { src: '/images/waterfront-property-mulching-virginia.jpg', alt: 'Forestry mulching on waterfront property in the Northern Neck of Virginia', caption: 'Waterfront Mulching · Brush cleared to the water' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section>
+    <div class="container container-narrow" style="text-align: center;">
+      <p class="eyebrow">Project Gallery</p>
+      <h1>Real Projects, Real Equipment, Real Results</h1>
+      <p style="font-size: 1.15rem; margin-top: 1rem;">
+        Every photo below is actual Keystone LandWorks work — not stock photography.
+        Forestry mulching, land clearing, excavation, and gravel driveway projects across
+        the Northern Neck of Virginia.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="photo-grid">
+        {projects.map(p => (
+          <figure>
+            <img src={p.src} alt={p.alt} loading="lazy" />
+            <figcaption>{p.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

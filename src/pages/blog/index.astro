@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { SITE, BLOG_POSTS } from '../../consts.js';
+
+const title = 'Land Owner Resources & Articles | Keystone LandWorks';
+const description = 'Practical articles about forestry mulching, land clearing, gravel driveways, and property improvement in the Northern Neck of Virginia. Written by Keystone LandWorks.';
+
+const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<BaseLayout title={title} description={description}>
+  <section>
+    <div class="container container-narrow" style="text-align: center;">
+      <p class="eyebrow">Articles & Resources</p>
+      <h1>Practical Reading for Property Owners</h1>
+      <p style="font-size: 1.15rem; margin-top: 1rem;">
+        Honest answers to the questions we get asked most often about land clearing,
+        forestry mulching, gravel driveways, and property improvement in the Northern Neck.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="grid grid-2">
+        {sortedPosts.map(post => (
+          <a href={`/blog/${post.slug}/`} class="card service-card">
+            <p style="font-size: 0.85rem; color: var(--color-mute); margin-bottom: 0.5rem;">
+              {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            <h2 style="font-size: 1.35rem;">{post.title}</h2>
+            <p>{post.description}</p>
+            <span class="card-link">Read article →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>
+
+<style>
+  .service-card { display: block; text-decoration: none; color: inherit; }
+  .card-link { display: inline-block; margin-top: 1rem; color: var(--color-accent-dark); font-weight: 600; }
+</style>

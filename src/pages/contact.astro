@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts.js';
+
+const title = `Contact Keystone LandWorks | Free Estimates in the Northern Neck, VA`;
+const description = `Contact Keystone LandWorks for forestry mulching, land clearing, excavation, and gravel driveway services in the Northern Neck of Virginia. Call ${SITE.phone} or email ${SITE.email}.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <section>
+    <div class="container container-narrow" style="text-align: center;">
+      <p class="eyebrow">Get In Touch</p>
+      <h1>Contact Keystone LandWorks</h1>
+      <p style="font-size: 1.15rem; margin-top: 1rem;">
+        Call directly, send an email, or fill out the form below. Free on-site
+        estimates across the Northern Neck of Virginia.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: start; max-width: 1000px; margin: 0 auto;">
+        <div class="card" style="padding: 2.5rem;">
+          <h2>Direct Contact</h2>
+          <p style="margin-top: 1rem;"><strong>Fastest way to start a project:</strong></p>
+
+          <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--color-bg); border-radius: 4px;">
+            <p style="margin-bottom: 0.5rem; color: var(--color-mute); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Phone</p>
+            <a href={`tel:${SITE.phoneRaw}`} class="phone-link" style="font-size: 1.5rem; color: var(--color-primary);">{SITE.phone}</a>
+          </div>
+
+          <div style="margin: 1.5rem 0;">
+            <p style="margin-bottom: 0.5rem; color: var(--color-mute); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Email</p>
+            <a href={`mailto:${SITE.email}`} style="font-size: 1.15rem;">{SITE.email}</a>
+          </div>
+
+          <div style="margin: 1.5rem 0;">
+            <p style="margin-bottom: 0.5rem; color: var(--color-mute); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Service Area</p>
+            <p>Northern Neck of Virginia &mdash; Essex, Richmond, Lancaster, Northumberland, and Westmoreland Counties.</p>
+          </div>
+
+          <div style="margin: 1.5rem 0;">
+            <p style="margin-bottom: 0.5rem; color: var(--color-mute); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Hours</p>
+            <p>Monday &ndash; Saturday: 7:00 AM &ndash; 7:00 PM</p>
+          </div>
+
+          <a href={`tel:${SITE.phoneRaw}`} class="btn btn-primary btn-large" style="margin-top: 1rem; width: 100%;">Call {SITE.phone}</a>
+        </div>
+
+        <div class="card" style="padding: 2.5rem;">
+          <h2>Request an Estimate</h2>
+          <p style="margin-top: 1rem;">
+            Tell us about your project. We typically respond same-day during business hours.
+          </p>
+
+          <form
+            action={`mailto:${SITE.email}`}
+            method="post"
+            enctype="text/plain"
+            style="margin-top: 1.5rem;"
+          >
+            <div class="form-row">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-row">
+              <label for="phone">Phone *</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" />
+            </div>
+
+            <div class="form-row">
+              <label for="location">Property Location (Town / County)</label>
+              <input type="text" id="location" name="location" placeholder="e.g. Warsaw, Richmond County" />
+            </div>
+
+            <div class="form-row">
+              <label for="service">Service Needed</label>
+              <select id="service" name="service">
+                <option value="">Select a service...</option>
+                <option>Forestry Mulching</option>
+                <option>Land Clearing</option>
+                <option>Excavation</option>
+                <option>Gravel Driveway</option>
+                <option>Homesite / Lot Clearing</option>
+                <option>Multiple / Not Sure</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="message">Describe the project *</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Approximate acreage, what is on the property now, what you want it to look like when we are done, any timing needs..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Send Estimate Request</button>
+
+            <p style="font-size: 0.85rem; color: var(--color-mute); margin-top: 1rem; text-align: center;">
+              Or just call directly: <a href={`tel:${SITE.phoneRaw}`}>{SITE.phone}</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .form-row {
+    margin-bottom: 1.25rem;
+  }
+  .form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 1.5px solid var(--color-line-strong);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: white;
+    transition: border-color 0.15s;
+  }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+</style>
