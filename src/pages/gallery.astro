@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { SITE } from '../consts.js';
+
+const title = `Project Gallery | Keystone LandWorks - Northern Neck VA`;
+const description = `See real forestry mulching, land clearing, excavation, and gravel driveway projects completed by Keystone LandWorks across the Northern Neck of Virginia and surrounding areas. Residential and commercial work.`;
+
+// Real Keystone LandWorks project photos. Order matches client review.
+const projects = [
+  // 1
+  { src: '/images/long-gravel-driveway-installation-virginia.jpg', alt: 'Long gravel driveway installation through the woods on a Northern Neck Virginia property', caption: 'Gravel Driveway · Long rural install through wooded property' },
+  // 2
+  { src: '/images/waterfront-lot-clearing-finished-northern-neck.jpg', alt: 'Forestry mulched access road on a property in the Northern Neck of Virginia', caption: 'Forestry Mulched Access Road · Property access opened up' },
+  // 3
+  { src: '/images/forestry-mulching-pine-trees-northern-neck.jpg', alt: 'Forestry mulching on a Northern Neck property with mature pine trees preserved', caption: 'Forestry Mulching · Selective clearing, mature pines preserved' },
+  // 4
+  { src: '/images/case-excavator-skid-steer-land-clearing-virginia.jpg', alt: 'Case excavator and skid steer on a land clearing project in Virginia', caption: 'Land Clearing · Case excavator and skid steer on site' },
+  // 5
+  { src: '/images/cleared-homesite-northern-neck-virginia.jpg', alt: 'Cleared homesite ready for new home construction in the Northern Neck of Virginia', caption: 'Homesite Clearing · Cleared and ready for build' },
+  // 6
+  { src: '/images/gravel-driveway-crowned-virginia.jpg', alt: 'New gravel driveway with proper crown for water drainage on a Virginia property', caption: 'Gravel Driveway · Fresh install, properly crowned' },
+  // 7
+  { src: '/images/forestry-mulching-finished-northern-neck-virginia.jpg', alt: 'Forestry mulching finished work on a Northern Neck Virginia property', caption: 'Forestry Mulching · Park-like finish with trees retained' },
+  // 8
+  { src: '/images/waterfront-property-clearing-northern-neck.jpg', alt: 'Skid steer with forestry mulching head ready to mulch a property in the Northern Neck', caption: 'Forestry Mulching · Skid steer with mulching head ready to work' },
+  // 9
+  { src: '/images/land-clearing-burn-pile-virginia.jpg', alt: 'Heavy land clearing on a Virginia property', caption: 'Land Clearing · Heavy clearing in progress' },
+  // 10 - WAS labeled as driveway, actually forestry mulching
+  { src: '/images/gravel-driveway-residential-virginia.jpg', alt: 'Forestry mulching project on a residential property in the Northern Neck of Virginia', caption: 'Forestry Mulching · Residential property cleared' },
+  // 11
+  { src: '/images/case-excavator-northern-neck-land-clearing.jpg', alt: 'Case excavator working on a land clearing project in the Northern Neck of Virginia', caption: 'Land Clearing · Case excavator at work' },
+  // 12 - rotated to vertical and renamed
+  { src: '/images/forestry-mulched-access-trail-northern-neck-virginia.jpg', alt: 'Forestry mulched access trail around a property in the Northern Neck of Virginia', caption: 'Forestry Mulching · Access trail mulched around property' },
+  // 13 - BEFORE
+  { src: '/images/driveway-before-regrading-virginia.jpg', alt: 'Driveway before regrading and gravel installation on a Virginia property', caption: 'BEFORE · Rough dirt driveway needing rebuild' },
+  // 14 - also BEFORE, a different driveway project
+  { src: '/images/driveway-before-yellow-house-residential.jpg', alt: 'Worn driveway at a residential property before regrading and gravel installation', caption: 'BEFORE · Worn residential driveway needing work' },
+  // 15
+  { src: '/images/gravel-driveway-curved-installation.jpg', alt: 'Grading around a new garage on a Virginia property', caption: 'Site Prep · Grading around new garage' },
+  // 16 - AFTER (regraded, gravel added)
+  { src: '/images/site-preparation-pole-barn-virginia.jpg', alt: 'Driveway after regrading and fresh gravel installation by Keystone LandWorks', caption: 'AFTER · Driveway regraded and new stone added' },
+  // 17 - AFTER (regraded, gravel added)
+  { src: '/images/garage-pad-site-prep-virginia.jpg', alt: 'Finished driveway with new gravel installed by Keystone LandWorks', caption: 'AFTER · Finished driveway with new gravel' },
+  // 18
+  { src: '/images/finished-land-clearing-virginia.jpg', alt: 'Finished land clearing project with cleaned and leveled property in Virginia', caption: 'Finished Clearing · Ready for what is next' },
+  // 19
+  { src: '/images/gravel-driveway-rural-virginia-property.jpg', alt: 'New gravel driveway installed for a garage with grading around the building in Virginia', caption: 'Gravel Driveway · New install with grading around garage' },
+  // 20
+  { src: '/images/forestry-mulching-skid-steer-in-action.jpg', alt: 'Forestry mulching skid steer in action on a Virginia property', caption: 'Forestry Mulching · Skid steer working live' },
+  // 21 - COMMERCIAL note
+  { src: '/images/homesite-clearing-with-silt-fence-virginia.jpg', alt: 'Commercial land clearing project with proper silt fence and erosion control in Virginia', caption: 'Commercial Project · Land cleared with proper erosion control' },
+  // 22 - cleared lot (not driveway)
+  { src: '/images/rural-gravel-driveway-northern-neck.jpg', alt: 'Cleared lot in the Northern Neck of Virginia with equipment trailer on site', caption: 'Lot Clearing · Cleared property in the Northern Neck' },
+  // 23
+  { src: '/images/forestry-mulching-brush-clearing-virginia.jpg', alt: 'Forestry mulching brush clearing on a Northern Neck Virginia property', caption: 'Forestry Mulching · Brush and undergrowth cleared' },
+  // 24 - BEFORE of the timbered trail mulching
+  { src: '/images/forestry-mulching-trail-timbered-property-before.jpg', alt: 'Forestry mulching a trail through previously timbered property in Virginia', caption: 'BEFORE · Trail mulching through timbered property' },
+  // 25 - NEW AFTER photo paired with 24
+  { src: '/images/forestry-mulched-trail-finished-timbered-property.jpg', alt: 'Finished mulched trail through previously timbered property, view from skid steer operator seat', caption: 'AFTER · Same trail, fully mulched and cleared' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section>
+    <div class="container container-narrow" style="text-align: center;">
+      <p class="eyebrow">Project Gallery</p>
+      <h1>Real Projects, Real Equipment, Real Results</h1>
+      <p style="font-size: 1.15rem; margin-top: 1rem;">
+        Every photo below is actual Keystone LandWorks work — not stock photography.
+        Forestry mulching, land clearing, excavation, and gravel driveway projects
+        across the Northern Neck of Virginia and surrounding areas. Residential and commercial.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <div class="photo-grid">
+        {projects.map(p => (
+          <figure>
+            <img src={p.src} alt={p.alt} loading="lazy" />
+            <figcaption>{p.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

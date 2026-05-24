@@ -1,0 +1,345 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { SITE, SERVICES, SERVICE_AREAS } from '../../consts.js';
+
+export function getStaticPaths() {
+  return SERVICES.map(s => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+
+// SEO-optimized content per service
+const SERVICE_CONTENT = {
+  'forestry-mulching': {
+    h1: 'Forestry Mulching in the Northern Neck of Virginia',
+    metaTitle: 'Forestry Mulching in the Northern Neck, VA | Keystone LandWorks',
+    metaDescription: 'Professional forestry mulching across the Northern Neck of Virginia. Clear brush, saplings, and overgrowth in one pass — no burning, no debris. Free estimates. Call (804) 250-1709.',
+    intro: 'Forestry mulching is the cleanest, fastest way to reclaim overgrown property. A single tracked machine grinds brush, saplings, and small trees into a uniform layer of mulch — no burn piles, no debris hauling, no torn-up topsoil. For most Northern Neck property owners, it is the right tool for the job.',
+    benefits: [
+      { h: 'No burn permits, no debris hauling', p: 'Everything stays on-site as mulch. No smoke, no piles, no dump trips. That saves time and money on most jobs.' },
+      { h: 'Soil and root systems stay intact', p: 'Unlike bulldozing, forestry mulching leaves topsoil and mature tree roots in place. Erosion control is built into the process.' },
+      { h: 'Selective clearing is possible', p: 'We can take out brush and small trees while leaving mature hardwoods standing. Great for opening view lines, thinning timber stands, or maintaining a wooded look.' },
+      { h: 'Fast turnaround on most jobs', p: 'A typical Northern Neck property takes 1–3 days. Bigger tracts take longer, but you are still looking at a fraction of the time of traditional clearing.' },
+    ],
+    useCases: [
+      'Overgrown lots and abandoned property reclamation',
+      'Fence row, ditch line, and field edge cleanup',
+      'Hunting property — shooting lanes, food plot prep, trail cutting',
+      'Right-of-way and utility access clearing',
+      'Pasture reclamation from brush encroachment',
+      'View-line clearing on waterfront and view lots',
+      'Wildfire mitigation around homes and outbuildings',
+    ],
+    process: [
+      { h: '1. Walk the property', p: 'We meet you on-site, look at the work, and talk through what you want. We will tell you what mulching can and cannot do for your specific situation.' },
+      { h: '2. Provide a clear estimate', p: 'You get a straight quote based on acreage, vegetation density, and access. No vague hourly estimates that drag on.' },
+      { h: '3. Schedule and execute', p: 'We bring the equipment, do the work, and leave the property cleaner than we found it. Most jobs are wrapped up in a few days.' },
+    ],
+  },
+  'land-clearing': {
+    h1: 'Land Clearing in the Northern Neck of Virginia',
+    metaTitle: 'Land Clearing Services in the Northern Neck, VA | Keystone LandWorks',
+    metaDescription: 'Land clearing for homesites, lots, pastures, and rural property across the Northern Neck of Virginia. 25 years of experience. Free estimates. Call (804) 250-1709.',
+    intro: 'Land clearing turns overgrown or wooded property into usable land. Whether you are prepping a homesite, opening a hunting tract, reclaiming pasture, or cleaning up after a storm, Keystone LandWorks handles the whole job — from initial walk-through to a clean finish.',
+    benefits: [
+      { h: 'Full-service from start to finish', p: 'Trees, brush, stumps, grading, and cleanup. One contractor, one schedule, one bill.' },
+      { h: '25 years of Northern Neck experience', p: 'We know the soils, the wet seasons, and how Virginia property responds to clearing work. That experience shows up in the finish.' },
+      { h: 'Right tool for the job', p: 'Sometimes a job calls for forestry mulching. Sometimes it needs a dozer or excavator. We choose the right approach instead of forcing one method.' },
+      { h: 'Insured and accountable', p: 'Licensed, insured, and locally based. You are not chasing an out-of-state crew if something needs follow-up.' },
+    ],
+    useCases: [
+      'Homesite and building lot clearing',
+      'Pasture and farmland reclamation',
+      'Hunting property — clearing for cabins, food plots, and access',
+      'Commercial site prep',
+      'Storm cleanup and downed timber removal',
+      'Subdivision lot clearing for developers',
+      'Brush removal for property resale',
+    ],
+    process: [
+      { h: '1. On-site assessment', p: 'We walk the property with you, look at access, drainage, and tree mix, and outline a plan.' },
+      { h: '2. Detailed quote', p: 'A written estimate covering scope, equipment, and timeline. No surprises after the work starts.' },
+      { h: '3. Clean execution', p: 'Equipment in, work done, debris handled, property finished. You should not have to clean up after your contractor.' },
+    ],
+  },
+  'excavation': {
+    h1: 'Excavation Contractor in the Northern Neck of Virginia',
+    metaTitle: 'Excavation Services in the Northern Neck, VA | Keystone LandWorks',
+    metaDescription: 'Excavation, grading, site preparation, and drainage work across the Northern Neck of Virginia. Licensed, insured, and locally owned. Free estimates. Call (804) 250-1709.',
+    intro: 'Excavation is the work that prepares property for everything else — buildings, driveways, ponds, drainage, and grading. Keystone LandWorks handles light and mid-scale excavation projects across the Northern Neck with the experience to get the grade right the first time.',
+    benefits: [
+      { h: 'Grading done right', p: 'Bad grading shows up the first hard rain. We pay attention to slope, drainage paths, and how water actually moves across your property.' },
+      { h: 'Site prep for builds', p: 'Whether you are putting in a shop, a barn, an addition, or a new home, we can pad and prep the site to spec.' },
+      { h: 'Drainage and water management', p: 'Swales, ditches, culverts, and french drains. Northern Neck soils need real attention to drainage — we handle it.' },
+      { h: 'Equipment matched to the job', p: 'Excavators, skid steers, and tracked mulchers — we bring what fits the property and the work, not just what is sitting on the trailer.' },
+    ],
+    useCases: [
+      'Building pad and foundation prep',
+      'Driveway grading and culvert installation',
+      'Pond cleanout and small pond construction',
+      'French drains and surface drainage',
+      'Lot and property leveling',
+      'Trenching for utilities',
+      'Land grading and contouring',
+    ],
+    process: [
+      { h: '1. Property walk-through', p: 'We look at the grade, drainage, soil conditions, and access. Excavation jobs live or die on the prep work — we take it seriously.' },
+      { h: '2. Plan and quote', p: 'A clear breakdown of the work, the equipment, and the schedule. We will tell you up front if a job needs a surveyor or engineer.' },
+      { h: '3. Execute and finish', p: 'Clean dirt work, proper compaction where it matters, and a finished grade you can actually build on or drive on.' },
+    ],
+  },
+  'gravel-driveways': {
+    h1: 'Gravel Driveway Installation in the Northern Neck of Virginia',
+    metaTitle: 'Gravel Driveway Installation in the Northern Neck, VA | Keystone LandWorks',
+    metaDescription: 'New gravel driveway installation, regrading, and access road work across the Northern Neck of Virginia. Properly crowned, graded, and built for Virginia weather. Call (804) 250-1709.',
+    intro: 'A gravel driveway should last for years without ruts, washouts, or constant patching. The difference between a good gravel driveway and a bad one is almost entirely in the prep work — base, grade, crown, and the right stone. Keystone LandWorks installs gravel driveways across the Northern Neck the right way the first time.',
+    benefits: [
+      { h: 'Proper base and grade', p: 'We clear, level, and compact the base before any gravel goes down. A driveway built on soft ground will not hold up to Virginia rainfall.' },
+      { h: 'Right crown for drainage', p: 'A proper crown sheds water off both sides — that one detail is the difference between a driveway that lasts and one that washes out every spring.' },
+      { h: 'Quality stone, properly placed', p: 'We use the right base course and surface stone for the soil and traffic. Not just whatever showed up on the truck.' },
+      { h: 'Long, straight, or rural? No problem.', p: 'Many Northern Neck properties have driveways running hundreds of feet from the road to the home. We have the equipment and the experience for long rural access driveways.' },
+    ],
+    useCases: [
+      'New gravel driveways from road to home',
+      'Long rural access driveways and lanes',
+      'Driveway regrading and rebuild',
+      'Pothole and washout repair',
+      'Driveway extensions and turnarounds',
+      'Shop and barn access roads',
+      'Field access and farm lanes',
+    ],
+    process: [
+      { h: '1. Walk the route', p: 'We look at where the driveway will run, the soil, the slope, and how water moves. That walk-through determines the right approach.' },
+      { h: '2. Quote the right job', p: 'A clear quote covering base prep, materials, depth, crown, and any culvert or drainage work. No shortcuts hidden in the price.' },
+      { h: '3. Build it to last', p: 'Excavation, base, compaction, surface stone, and a proper finished crown. Built so you are not calling us back in two years for the same work.' },
+    ],
+  },
+  'lot-clearing': {
+    h1: 'Lot &amp; Homesite Clearing in the Northern Neck of Virginia',
+    metaTitle: 'Homesite & Lot Clearing in the Northern Neck, VA | Keystone LandWorks',
+    metaDescription: 'Homesite and building lot clearing across the Northern Neck of Virginia — trees, stumps, brush, and grading handled in one job. 25 years experience. Call (804) 250-1709.',
+    intro: 'Building a new home or shop starts with the lot. Trees down, stumps out, brush cleared, ground roughly graded — that is what a builder needs before footings can go in. Keystone LandWorks handles full homesite clearing across the Northern Neck so your builder shows up to a site that is ready to work.',
+    benefits: [
+      { h: 'One contractor, one job', p: 'You do not need separate crews for tree work, stump removal, and grading. We handle the whole clearing as one project.' },
+      { h: 'Builder-ready finish', p: 'Cleared, stumped, debris off-site or mulched, and rough graded. Your builder can move directly to layout and footings.' },
+      { h: 'Selective clearing where you want it', p: 'Keep specific mature trees, preserve a view line, or maintain a tree buffer along the property line. We work to your plan.' },
+      { h: 'Site work and access in one trip', p: 'While we are on-site clearing, we can rough in the driveway location and pad the homesite. Fewer mobilizations, faster overall timeline.' },
+    ],
+    useCases: [
+      'New construction homesite clearing',
+      'Building lot prep for spec homes and resale',
+      'Shop, barn, and outbuilding pad clearing',
+      'Subdivision lot clearing',
+      'Manufactured home pad preparation',
+      'Driveway corridor clearing along with the homesite',
+      'Selective tree removal for view-line preservation',
+    ],
+    process: [
+      { h: '1. Walk the lot with you', p: 'We mark trees to keep, identify the building pad, locate the driveway, and look at access for equipment.' },
+      { h: '2. Provide a full quote', p: 'Clearing, stumping, debris handling, rough grade, and access work — all in one estimate with no surprise add-ons.' },
+      { h: '3. Deliver a build-ready site', p: 'Cleared, prepped, and ready for your builder to start work. We coordinate timing with your construction schedule.' },
+    ],
+  },
+};
+
+const content = SERVICE_CONTENT[service.slug];
+
+// Service-specific photos with SEO alt text
+const SERVICE_PHOTOS = {
+  'forestry-mulching': {
+    hero: { src: '/images/forestry-mulching-pine-trees-northern-neck.jpg', alt: 'Forestry mulching with mature pine trees preserved on a Northern Neck Virginia property' },
+    gallery: [
+      { src: '/images/forestry-mulching-finished-northern-neck-virginia.jpg', alt: 'Park-like finish after forestry mulching on a Northern Neck Virginia property', caption: 'Selective mulching · mature trees retained' },
+      { src: '/images/forestry-mulching-selective-clearing-virginia.jpg', alt: 'Selective forestry mulching clearing understory while keeping mature trees', caption: 'Understory cleared, hardwoods kept standing' },
+      { src: '/images/forestry-mulching-skid-steer-in-action.jpg', alt: 'Forestry mulching skid steer in action on a Virginia property', caption: 'Skid steer mulcher working live' },
+      { src: '/images/forestry-mulching-brush-clearing-virginia.jpg', alt: 'Forestry mulching brush clearing on a Northern Neck Virginia property', caption: 'Brush and undergrowth ground to mulch' },
+      { src: '/images/forestry-mulched-access-trail-northern-neck-virginia.jpg', alt: 'Forestry mulched access trail through a Northern Neck Virginia property', caption: 'Access trail mulched through property' },
+      { src: '/images/forestry-mulched-trail-finished-timbered-property.jpg', alt: 'Finished forestry mulched trail through a previously timbered property', caption: 'Finished trail through timbered property' },
+    ],
+  },
+  'land-clearing': {
+    hero: { src: '/images/case-excavator-skid-steer-land-clearing-virginia.jpg', alt: 'Case excavator and skid steer on a land clearing project in the Northern Neck of Virginia' },
+    gallery: [
+      { src: '/images/cleared-homesite-northern-neck-virginia.jpg', alt: 'Cleared homesite ready for new home construction in the Northern Neck of Virginia', caption: 'Homesite cleared and ready' },
+      { src: '/images/finished-land-clearing-virginia.jpg', alt: 'Finished land clearing project on a Virginia property', caption: 'Cleared, leveled, and finished' },
+      { src: '/images/land-clearing-burn-pile-virginia.jpg', alt: 'Heavy land clearing on a Virginia property', caption: 'Heavy clearing in progress' },
+      { src: '/images/case-excavator-northern-neck-land-clearing.jpg', alt: 'Case excavator working a land clearing job in the Northern Neck of Virginia', caption: 'Case excavator working a clearing job' },
+      { src: '/images/homesite-clearing-with-silt-fence-virginia.jpg', alt: 'Commercial land clearing with proper erosion control silt fence in Virginia', caption: 'Commercial project with erosion control' },
+      { src: '/images/rural-gravel-driveway-northern-neck.jpg', alt: 'Cleared lot in the Northern Neck of Virginia ready for next phase', caption: 'Lot cleared and ready' },
+    ],
+  },
+  'excavation': {
+    hero: { src: '/images/garage-pad-site-prep-virginia.jpg', alt: 'Site preparation and grading around a new garage in the Northern Neck of Virginia' },
+    gallery: [
+      { src: '/images/garage-pad-site-prep-virginia.jpg', alt: 'Grading around a new garage on a Virginia property', caption: 'Grading around new garage' },
+      { src: '/images/finished-site-prep-northern-neck.jpg', alt: 'Finished site preparation work in the Northern Neck of Virginia', caption: 'Site prep finished and ready to build' },
+      { src: '/images/land-clearing-corridor-northern-neck.jpg', alt: 'Excavation and clearing corridor work in the Northern Neck of Virginia', caption: 'Clearing and excavation corridor' },
+      { src: '/images/case-excavator-northern-neck-land-clearing.jpg', alt: 'Case excavator on a Virginia excavation project', caption: 'Excavator on site' },
+      { src: '/images/homesite-clearing-with-silt-fence-virginia.jpg', alt: 'Commercial excavation with proper erosion control on a Virginia property', caption: 'Commercial project with erosion control' },
+      { src: '/images/cleared-homesite-northern-neck-virginia.jpg', alt: 'Excavated and cleared homesite in the Northern Neck of Virginia', caption: 'Excavated and ready for footings' },
+    ],
+  },
+  'gravel-driveways': {
+    hero: { src: '/images/gravel-driveway-crowned-virginia.jpg', alt: 'New gravel driveway with proper crown and grade installed by Keystone LandWorks in Virginia' },
+    gallery: [
+      { src: '/images/long-gravel-driveway-installation-virginia.jpg', alt: 'Long gravel driveway installation through wooded property in the Northern Neck of Virginia', caption: 'Long rural driveway install' },
+      { src: '/images/gravel-driveway-curved-installation.jpg', alt: 'Grading around a new garage with driveway access in Virginia', caption: 'Grading around new garage' },
+      { src: '/images/garage-pad-site-prep-virginia.jpg', alt: 'New gravel driveway installed for a garage with grading around the building', caption: 'New install with garage grading' },
+      { src: '/images/driveway-before-regrading-virginia.jpg', alt: 'Driveway before regrading and gravel installation on a Virginia property', caption: 'BEFORE · rough dirt driveway' },
+      { src: '/images/site-preparation-pole-barn-virginia.jpg', alt: 'Same driveway after regrading and new stone added by Keystone LandWorks', caption: 'AFTER · regraded with new stone' },
+      { src: '/images/gravel-driveway-residential-northern-neck.jpg', alt: 'Residential gravel driveway in the Northern Neck of Virginia', caption: 'Residential driveway' },
+    ],
+  },
+  'lot-clearing': {
+    hero: { src: '/images/cleared-homesite-northern-neck-virginia.jpg', alt: 'Cleared homesite ready for new home construction in the Northern Neck of Virginia' },
+    gallery: [
+      { src: '/images/homesite-clearing-with-silt-fence-virginia.jpg', alt: 'Commercial lot clearing with proper silt fence and erosion control', caption: 'Commercial project with erosion control' },
+      { src: '/images/lot-clearing-northern-neck-finished.jpg', alt: 'Lot clearing finished and ready for new construction', caption: 'Lot finished and ready' },
+      { src: '/images/finished-land-clearing-virginia.jpg', alt: 'Finished land clearing for a homesite in Virginia', caption: 'Cleared, leveled, ready' },
+      { src: '/images/waterfront-lot-clearing-northern-neck-virginia.jpg', alt: 'Waterfront lot clearing on the Northern Neck of Virginia', caption: 'Waterfront lot opened up' },
+      { src: '/images/rural-gravel-driveway-northern-neck.jpg', alt: 'Cleared lot ready for next phase on a Virginia property', caption: 'Lot cleared and ready' },
+      { src: '/images/case-excavator-skid-steer-land-clearing-virginia.jpg', alt: 'Case excavator and skid steer clearing a building lot in Virginia', caption: 'Equipment on the lot' },
+    ],
+  },
+};
+
+const photos = SERVICE_PHOTOS[service.slug];
+
+// Service schema markup
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.name,
+  "description": content.metaDescription,
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": SITE.legalName,
+    "telephone": SITE.phone,
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Northern Neck, Virginia"
+  },
+  "serviceType": service.name,
+};
+---
+
+<BaseLayout
+  title={content.metaTitle}
+  description={content.metaDescription}
+  schema={serviceSchema}
+>
+  <section>
+    <div class="container container-narrow">
+      <p class="eyebrow">Service · Northern Neck, VA</p>
+      <h1 set:html={content.h1} />
+      <p style="font-size: 1.2rem; margin-top: 1.5rem; color: var(--color-ink-soft);">
+        {content.intro}
+      </p>
+      <div style="margin-top: 2rem;">
+        <a href={`tel:${SITE.phoneRaw}`} class="btn btn-primary btn-large">Call {SITE.phone}</a>
+        <a href="/contact" class="btn btn-secondary btn-large" style="margin-left: 0.5rem;">Get a Free Estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <figure class="service-hero-image">
+        <img src={photos.hero.src} alt={photos.hero.alt} loading="eager" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <h2>Why Choose Keystone LandWorks for {service.name}</h2>
+      <div class="grid grid-2" style="margin-top: 2rem;">
+        {content.benefits.map(b => (
+          <div class="card">
+            <h3>{b.h}</h3>
+            <p>{b.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="grid grid-2" style="align-items: start;">
+        <div>
+          <h2>Common {service.name} Projects</h2>
+          <p>Some of the most frequent {service.name.toLowerCase()} projects we handle across the Northern Neck:</p>
+          <ul class="feature-list">
+            {content.useCases.map(u => <li>{u}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h2>How the Process Works</h2>
+          {content.process.map(step => (
+            <div style="margin-bottom: 1.5rem;">
+              <h3 style="color: var(--color-primary); font-size: 1.15rem;">{step.h}</h3>
+              <p>{step.p}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <h2 style="text-align: center;">Recent {service.name} Projects</h2>
+      <p style="text-align: center; max-width: 700px; margin: 1rem auto 2.5rem;">
+        Real {service.name.toLowerCase()} work completed by Keystone LandWorks across the Northern Neck of Virginia.
+      </p>
+      <div class="photo-grid">
+        {photos.gallery.map(p => (
+          <figure>
+            <img src={p.src} alt={p.alt} loading="lazy" />
+            <figcaption>{p.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p style="text-align: center; margin-top: 2rem;">
+        <a href="/gallery" class="btn btn-secondary">See Full Project Gallery</a>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 style="text-align: center;">{service.name} Service Areas in the Northern Neck and Surrounding Areas</h2>
+      <p style="text-align: center; max-width: 700px; margin: 1rem auto 2rem;">
+        Keystone LandWorks provides {service.name.toLowerCase()} services to property owners across the Northern Neck of Virginia, including:
+      </p>
+      <div class="area-cloud" style="justify-content: center;">
+        {SERVICE_AREAS.map(a => (
+          <a href={`/service-areas/${a.slug}/`}>{a.city}, {a.state}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    title={`Ready to start your ${service.name.toLowerCase()} project?`}
+    subtitle={`Call ${SITE.phone} or request a free on-site estimate. We typically respond same-day during business hours.`}
+  />
+</BaseLayout>
+
+<style>
+  .service-hero-image {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    max-height: 520px;
+  }
+  .service-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 520px;
+  }
+</style>

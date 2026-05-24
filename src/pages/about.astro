@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { SITE } from '../consts.js';
+
+const title = `About Keystone LandWorks | 25 Years of Land Services in the Northern Neck`;
+const description = `Keystone LandWorks LLC is a locally owned land services contractor in the Northern Neck of Virginia. 25 years in business, fully licensed and insured, and rated 5 stars by our customers.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <section>
+    <div class="container container-narrow">
+      <p class="eyebrow">About Our Company</p>
+      <h1>25 Years of Land Services in the Northern Neck of Virginia</h1>
+      <p style="font-size: 1.2rem; margin-top: 1.5rem; color: var(--color-ink-soft);">
+        Keystone LandWorks LLC is a locally owned land services contractor based in the
+        Northern Neck of Virginia. We have been doing this work for 25 years — and the
+        work itself, plus the way we communicate with property owners, is what has kept
+        the phone ringing.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container container-narrow">
+      <h2>What We Do</h2>
+      <p>
+        We specialize in forestry mulching, land clearing, excavation, and gravel
+        driveway installation. The common thread across all of it is turning difficult
+        property into usable, finished land — whether that means clearing an overgrown
+        lot, opening a homesite, building a driveway from the road back to a new home,
+        or grading a building pad.
+      </p>
+
+      <h2 style="margin-top: 2.5rem;">Who We Work With</h2>
+      <p>
+        Homeowners, landowners, farmers, hunters, contractors, and developers across
+        Essex, Richmond, Lancaster, Northumberland, Westmoreland, Middlesex, Gloucester,
+        and King William Counties. We handle both residential and commercial work —
+        from single homesites and rural driveways to larger commercial site prep and
+        right-of-way projects.
+      </p>
+
+      <h2 style="margin-top: 2.5rem;">How We Work</h2>
+      <p>
+        Three things define how we run a job:
+      </p>
+      <ul class="feature-list">
+        <li><strong>We walk every property before we quote.</strong> Land work that gets quoted by phone is land work that has surprises in the price later.</li>
+        <li><strong>We give straight numbers.</strong> Estimates are written, scoped, and honest. You should not be wondering halfway through what the bill will look like.</li>
+        <li><strong>We finish clean.</strong> The property should look better when we leave than it did when we showed up. Not just clear — finished.</li>
+      </ul>
+
+      <h2 style="margin-top: 2.5rem;">Licensed, Insured, and Local</h2>
+      <p>
+        Keystone LandWorks is fully licensed and insured for the work we do. We are
+        locally based and locally accountable. If something needs follow-up, you are
+        not chasing an out-of-state crew.
+      </p>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>
