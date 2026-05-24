@@ -1,0 +1,17 @@
+{
+  "name": "keystone-landworks",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Keystone LandWorks LLC - Land Clearing, Forestry Mulching & Excavation in the Northern Neck of Virginia",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.0.0"
+  }
+}
