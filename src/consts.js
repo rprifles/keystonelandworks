@@ -3,7 +3,7 @@
 export const SITE = {
   name: 'Keystone LandWorks',
   legalName: 'Keystone LandWorks LLC',
-  url: 'https://www.keystonelandworks.com',
+  url: 'https://keystonelandworks.com',
   phone: '(804) 250-1709',
   phoneRaw: '8042501709',
   email: 'keystoneland@aol.com',
