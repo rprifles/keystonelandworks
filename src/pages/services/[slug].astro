@@ -144,6 +144,12 @@ const SERVICE_CONTENT = {
 };
 
 const content = SERVICE_CONTENT[service.slug];
+const ESTIMATE_NOTES = {
+  'forestry-mulching': 'Share the approximate acreage, what is growing there, how equipment can reach the area, and which trees you want to keep. Mulching leaves roots in the ground. If you need stumps removed for a building pad, let us know so we can discuss clearing instead.',
+  'excavation': 'Tell us what you want to build or fix and how equipment can reach the work area. For drainage jobs, point out where water collects or runs after rain. If you already have site plans, mention them when you request the estimate.',
+  'lot-clearing': 'Point out the planned building footprint and driveway route, and note any mature trees or buffers you want to keep. Tell us whether your builder has given you a target date so we can discuss how the clearing fits your schedule.',
+};
+const estimateNote = ESTIMATE_NOTES[service.slug];
 
 // Service-specific photos with SEO alt text
 const SERVICE_PHOTOS = {
@@ -288,6 +294,15 @@ const serviceSchema = {
       </div>
     </div>
   </section>
+
+  {estimateNote && (
+    <section class="section-alt">
+      <div class="container container-narrow">
+        <h2>What to tell us when you request an estimate</h2>
+        <p>{estimateNote}</p>
+      </div>
+    </section>
+  )}
 
   <section class="section-alt">
     <div class="container">
