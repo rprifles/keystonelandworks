@@ -2,6 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../consts.js';
 
+// Web3Forms form identifiers are public by design; never put a private key here.
+const configuredEndpoint = (import.meta.env.PUBLIC_QUOTE_FORM_ENDPOINT ?? 'https://api.web3forms.com/submit').trim();
+const publicAccessKey = (import.meta.env.PUBLIC_QUOTE_FORM_ACCESS_KEY ?? 'c0e6a048-322a-4f7f-9620-de57c1dd5185').trim();
+let quoteEndpoint: string | undefined;
+if (configuredEndpoint) {
+  const parsed = new URL(configuredEndpoint);
+  if (parsed.protocol !== 'https:' || parsed.username || parsed.password || parsed.hash) {
+    throw new Error('PUBLIC_QUOTE_FORM_ENDPOINT must be a public HTTPS URL without credentials or fragments.');
+  }
+  quoteEndpoint = parsed.href;
+}
+
 const title = `Contact Keystone LandWorks | Free Estimates in the Northern Neck, VA`;
 const description = `Contact Keystone LandWorks for forestry mulching, land clearing, excavation, and gravel driveway services in the Northern Neck of Virginia. Call ${SITE.phone} or email ${SITE.email}.`;
 ---
@@ -12,7 +24,7 @@ const description = `Contact Keystone LandWorks for forestry mulching, land clea
       <p class="eyebrow">Get In Touch</p>
       <h1>Contact Keystone LandWorks</h1>
       <p style="font-size: 1.15rem; margin-top: 1rem;">
-        Call directly, send an email, or fill out the form below. Free on-site
+        {quoteEndpoint ? "Call directly, send an email, or fill out the form below." : "Call or email us to request an estimate."} Free on-site
         estimates across the Northern Neck of Virginia.
       </p>
     </div>
@@ -51,15 +63,20 @@ const description = `Contact Keystone LandWorks for forestry mulching, land clea
         <div class="card" style="padding: 2.5rem;">
           <h2>Request an Estimate</h2>
           <p style="margin-top: 1rem;">
-            Tell us about your project. We typically respond same-day during business hours.
+            {quoteEndpoint ? "Tell us about your project. We typically respond same-day during business hours." : "Please call or email us to tell us about your project."}
           </p>
 
-          <form
-            action={`mailto:${SITE.email}`}
+          {quoteEndpoint && <form
+            id="quote-form"
+            action={quoteEndpoint}
             method="post"
-            enctype="text/plain"
+            enctype="multipart/form-data"
+            data-phone={SITE.phone}
             style="margin-top: 1.5rem;"
           >
+            {publicAccessKey && <input type="hidden" name="access_key" value={publicAccessKey} />}
+            <input type="hidden" name="subject" value="New Keystone LandWorks estimate request" />
+
             <div class="form-row">
               <label for="name">Name *</label>
               <input type="text" id="name" name="name" required />
@@ -98,19 +115,75 @@ const description = `Contact Keystone LandWorks for forestry mulching, land clea
               <textarea id="message" name="message" rows="5" required placeholder="Approximate acreage, what is on the property now, what you want it to look like when we are done, any timing needs..."></textarea>
             </div>
 
+            <p id="quote-status" role="status" aria-atomic="true"></p>
+
             <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Send Estimate Request</button>
 
             <p style="font-size: 0.85rem; color: var(--color-mute); margin-top: 1rem; text-align: center;">
               Or just call directly: <a href={`tel:${SITE.phoneRaw}`}>{SITE.phone}</a>
             </p>
-          </form>
+          </form>}
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
 
+<script>
+  const form = document.querySelector<HTMLFormElement>('#quote-form');
+  const status = document.querySelector<HTMLElement>('#quote-status');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  if (form && status && button) {
+    const normalLabel = button.textContent;
+    let sending = false;
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (sending || !form.reportValidity()) return;
+
+      const data = new FormData(form);
+      if (['name', 'phone', 'message'].some((field) => !String(data.get(field) ?? '').trim())) {
+        status.textContent = 'Please enter your name, phone number, and a brief project description.';
+        return;
+      }
+
+      sending = true;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      status.textContent = 'Sending your estimate request…';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+          credentials: 'omit',
+          redirect: 'error',
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!response.ok) throw new Error('Submission was not accepted.');
+        const result = await response.json();
+        if ((result?.ok !== true && result?.success !== true) || result?.ok === false || result?.success === false || result?.errors?.length) {
+          throw new Error('No confirmed receipt from the form service.');
+        }
+        form.reset();
+        status.textContent = 'Thanks! Your estimate request was submitted.';
+      } catch {
+        status.textContent = `We couldn't confirm your request was sent. Your entries are still here. You can try again or call ${form.dataset.phone}.`;
+      } finally {
+        sending = false;
+        button.disabled = false;
+        button.textContent = normalLabel;
+      }
+    });
+  }
+</script>
+
 <style>
+  #quote-status:not(:empty) {
+    margin: 0 0 1rem;
+  }
+
   .form-row {
     margin-bottom: 1.25rem;
   }
